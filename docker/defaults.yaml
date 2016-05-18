@@ -3,5 +3,6 @@
 docker:
   process_signature: '/usr/bin/docker'
   install_docker_py: True
+  install_repo: True
   refresh_repo: True
   config: []

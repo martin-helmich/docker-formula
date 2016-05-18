@@ -12,6 +12,7 @@ docker package dependencies:
       - ca-certificates
       - python-apt
 
+{%- if docker.install_repo %}
 {%- if grains["oscodename"]|lower == 'jessie' and "version" not in docker%}
 docker package repository:
   pkgrepo.managed:
@@ -40,7 +41,7 @@ purge old packages:
   pkgrepo.absent:
     - name: deb https://get.docker.com/ubuntu docker main
   pkg.purged:
-    - pkgs: 
+    - pkgs:
       - lxc-docker*
       - docker.io*
     - require_in:
@@ -60,6 +61,7 @@ docker package repository:
       - pkg: docker package
     - require:
       - pkg: docker package dependencies
+{% endif %}
 
 docker package:
   {%- if "version" in docker %}
